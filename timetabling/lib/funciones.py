@@ -39,3 +39,6 @@ def rearmarX(X,input):
             eventos.append(salones)
         dias.append(eventos)
     return dias
+
+def E(array):
+    return sum(array)
