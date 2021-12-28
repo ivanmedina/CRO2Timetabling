@@ -1,4 +1,3 @@
-
 def cursosDisponible(Y):
     return [ c for c in range(0,len(Y)) if not '1' in str(Y[c]) ]
                     
