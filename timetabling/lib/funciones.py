@@ -19,3 +19,23 @@ def aplanarX(X):
                     for p in range(len(X[d][e][s][c])):
                         array.append(X[d][e][s][c][p])
     return array
+
+def rearmarX(X,input):
+    i=0
+    dias=[]
+    for d in range(0,len(input['dias'])):
+        eventos=[]
+        for e in range(0,len(input['espacios'])):
+            salones=[]
+            for s in range(0,len(input['salones'])):
+                cursos=[]
+                for c in range(0,len(input['cursos'])):
+                    profesores=[]
+                    for p in range(0,len(input['profesores'])):
+                        profesores.append(X[i])
+                        i=i+1
+                    cursos.append(profesores)
+                salones.append(cursos)
+            eventos.append(salones)
+        dias.append(eventos)
+    return dias
