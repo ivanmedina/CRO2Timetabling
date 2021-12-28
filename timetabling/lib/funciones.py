@@ -9,3 +9,13 @@ def profesoresDisponibles(O,d,e):
 
 def cantCursosProfesor(Y,p):
     return  sum([ int(Y[c][p]) for c in range(0,len(Y)) ])
+
+def aplanarX(X):
+    array=[]
+    for d in range(len(X)):
+        for e in range(len(X[d])):
+            for s in range(len(X[d][e])):
+                for c in range(len(X[d][e][s])):
+                    for p in range(len(X[d][e][s][c])):
+                        array.append(X[d][e][s][c][p])
+    return array
