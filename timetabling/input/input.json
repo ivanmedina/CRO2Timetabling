@@ -1,0 +1,29 @@
+{
+    "dias":[
+        "Lunes", "Martes"
+    ],
+    "espacios":[
+        "07:30 - 08:20",
+        "08:20 - 09:10",
+        "09:10 - 10:00",
+        "10:00 - 10:50"
+
+    ],
+    "salones":[
+        "SALON 1",
+        "SALON 2"
+
+    ],
+    "cursos":[
+        {"nombre":"Curso 1", "horas":4},
+        {"nombre":"Curso 2", "horas":4}
+
+    ],
+    "profesores":[
+        {"nombre":"Profesor 1", "disponible":[[1,1,1,1],[1,1,1,1]], "cursos":[1,1]       },
+        {"nombre":"Profesor 2", "disponible":[[1,1,1,1],[1,1,1,1]], "cursos":[1,1]       }
+       
+    ],
+    "maxCP": 4,
+    "maxEC":3
+}
