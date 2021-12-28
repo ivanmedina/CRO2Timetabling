@@ -39,3 +39,39 @@ def dibujarTabla(X,input,nombre_archivo):
     texto+="</body>"
     texto+="</html>"
     horario.write(texto)
+
+def dibujarMatriz(X):
+    string="["
+    for d in range(0,len(X)):
+        string+="["
+        for e in range(0,len(X[d])):
+            string+="["
+            for s in range(0,len(X[d][e])):
+                string+="["
+                for c in range(0,len(X[d][e][s])):
+                    string+="["
+                    for p in range(0,len(X[d][e][s][c])):
+                        if p==len(X[d][e][s][c])-1:
+                            string+=str(X[d][e][s][c][p])
+                        else:
+                            string+=str(X[d][e][s][c][p])+", "
+                    if c == range(0,len(X[d][e][s])-1):
+                        string+="]"
+                    else:
+                        string+="],"
+                if s == range(0,len(X[d][e])-1):
+                    string+="]"
+                else:
+                    string+="],"
+            if e == range(0,len(X[d])-1):
+                string+="]"
+            else:
+                string+="],"
+        if d == range(0,len(X)-1):
+            string+="]"
+        else:
+            string+="],"
+    string+="]"
+    file=open('matriz.txt','w')
+    file.write(string)
+    return string
