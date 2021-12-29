@@ -53,7 +53,7 @@ def timetabling(input):
                                         U[c]=e
                                         G[d2][e2][s]=1
                                         O[d2][e2][pdp]=1
-                                        W[d][c]=1
+                                        W[d2][c]=1
                                         e2=e2+1
                                         horas=horas+1
                                     if e2==input['maxEC']:

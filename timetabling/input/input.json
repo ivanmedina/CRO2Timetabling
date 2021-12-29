@@ -12,7 +12,6 @@
     "salones":[
         "SALON 1",
         "SALON 2"
-
     ],
     "cursos":[
         {"nombre":"Curso 1", "horas":4},
