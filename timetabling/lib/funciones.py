@@ -42,3 +42,13 @@ def rearmarX(X,input):
 
 def E(array):
     return sum(array)
+
+def Z(X,G):
+    suma=0
+    for d in range(0,len(X)):
+        for e in range(0,len(X[d])):
+            for s in range(0,len(X[d][e])):
+                for c in range(0,len(X[d][e][s])):
+                    for p in range(0,len(X[d][e][s][c])):
+                        suma=(X[d][e][s][c][p] * G[d][e][s] )+suma
+    return suma

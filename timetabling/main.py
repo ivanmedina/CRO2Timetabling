@@ -2,7 +2,7 @@ from lib.funciones import *
 from lib.input import *
 from lib.output import *
 from lib.timetabling import timetabling
-from lib.restricciones import R1,R2,R3,R4,R5,R6,R7,R8,R9,R10
+from lib.restricciones import R1,R2,R3,R4,R5,R6,R7,R8,R9,R10,R11
 
 def main():
     
@@ -36,6 +36,13 @@ def main():
     print('Restriccion 8 para c=0 :', R8(salida['V'],0))
     print('Restriccion 9 para c=0 :', R9(salida['X'],salida['U'],salida['W'],0))
     print('Restriccion 10 para d=c=0 :', R10(salida['W'],0,0))
+    # print('Restriccion 11 :', R11(xlineal))
+
+    print(salida['Q'])
+    Z1=Z(salida['X'],salida['G'])
+    print('Z > ',Z1)
+
+    print('Restriccion 11 :', R11(151,Z1))
 
 
 if __name__ == "__main__":

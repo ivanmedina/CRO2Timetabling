@@ -84,8 +84,8 @@ def R10(W,d,c):
     return W[d][c]+W[d+1][c] <= 1
 
 
-def R11():
+def R11(Zanterior,Znueva):
     # R12 = Minimizar la cantidad de salones utilizados.
-    pass
+    return Znueva<Zanterior
 
 # E([1,2,3,4,5])
