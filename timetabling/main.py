@@ -61,9 +61,8 @@ def main():
     print('Restricciones duras booleano: ',RDCheck(input,salida))
     print('Restricciones suaves: ',RS(input,salida,150,Z1))
     print()
-    print('Funcion Objetivo: ',fitness(input,salida,150,Z1))
-
-
+    print('Funcion Objetivo: ',Fobj(input,salida,150,Z1))
+    print('fitness> ',fitness(Z1))
     print()
 
 if __name__ == "__main__":

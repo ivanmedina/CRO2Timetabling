@@ -122,8 +122,11 @@ def RS(input,salida,Zanterior,Znueva):
     suma+=verificarR8(salida['V'])
     suma+=verificarR9(input,salida['X'],salida['U'],salida['W'])
     suma+=verificarR10(input,salida['V'])
-    suma+= 1 if R11(Zanterior,Znueva) else 0
+    suma+= 100 if R11(Zanterior,Znueva) else 0
     return suma
 
-def fitness(input,salida,Zanterior,Znueva):
-    return (RD(input,salida)*K)/RS(input,salida,Zanterior,Znueva)
+def Fobj(input,salida,Zanterior,Znueva):
+    return (RD(input,salida)*K)+RS(input,salida,Zanterior,Znueva)
+
+def fitness(Z):
+    return 1/Z
