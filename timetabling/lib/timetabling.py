@@ -27,47 +27,58 @@ def timetabling(input):
         # print(cursosDisponible(Y))
         c=cursosDisponible(Y)[0]
         # Y[c]=1
-        for d in range(0,len(G)):
+        for d in range(0,len(G)-1,2):
             find=False
             for e in range(0,len(G[d])):
                 #seleccionar salon
                 if (len(salonesDisponibles(G,d,e))>0):
-                    s=salonesDisponibles(G,d,e)[0]
+                    sd=salonesDisponibles(G,d,e)
+                    s=sd[0]
                     #revisa los profesores
                     pd=profesoresDisponibles(O,d,e)
                     if(len(pd)>0):
                         profesor=True
-                        p=0
+                        p=pd[0]
                         while(profesor and p<len(pd) and int(cantCursosProfesor(Y,pd[p]))<input['maxCP']):
                             horas=0
                             d2=d
                             e2=e
                             while horas < C[c]['horas']:
                                 pdp=pd[p]
-                                try:
-                                    if P[pdp]['disponible'][d2][e2] == 1:
-                                    #   #marcar profesor salon dia y evento y curso ocupados
-                                        Y[c][pdp]=1
-                                        V[c][s]=1
-                                        X[d2][e2][s][c][pdp]=1
-                                        U[c]=e
-                                        G[d2][e2][s]=1
-                                        O[d2][e2][pdp]=1
-                                        W[d2][c]=1
-                                        e2=e2+1
-                                        horas=horas+1
-                                    if e2==input['maxEC']:
-                                        e2=e
-                                        d2=d2+1
-                                except:
-                                    find=True
-                                    profesor=False  
-                                    break  
-                            if horas==C[c]['horas'] or (e2>=En or d2>=Dn):
+                                if P[pdp]['disponible'][d2][e2] == 1 and G[d2][e2][s]==0 and O[d2][e2][pdp]==0:
+                                #   #marcar profesor salon dia y evento y curso ocupados
+                                    Y[c][pdp]=1
+                                    V[c][s]=1
+                                    X[d2][e2][s][c][pdp]=1
+                                    U[c]=e
+                                    G[d2][e2][s]=1
+                                    O[d2][e2][pdp]=1
+                                    W[d2][c]=1
+                                    e2=e2+1
+                                    horas=horas+1
+                                
+                                elif G[d2][e2][s]==1:
+                                    G[d2][e2][s]=1
+                                    d2=d2+1
+                                elif O[d2][e2][pdp]==1:
+                                    O[d2][e2][pdp]=1
+                                    pd=profesoresDisponibles(O,d2,e2)
+                                    p=0
+                                if e2>=input['maxEC']:
+                                    e2=e
+                                    if d2>=Dn-2:d2=d2+2
+                                    else:d2=d2+2
+                                if d2>=Dn:
+                                    d2=0
+                                    e2=0
+                            if horas>=C[c]['horas']:
                                 Q[s]=1
                                 find=True
                                 profesor=False
-                            p=p+1
+                            if (e2>=En):e2=0
+                            if (d2>=Dn):d2=0
+
+                            p=profesoresDisponibles(O,d,e)[0]
                 if find:
                     break
             if find:
