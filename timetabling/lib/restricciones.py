@@ -9,6 +9,7 @@ def R1(input,X,c):
             for s in range(0,len(X[d][e])):
                     for p in range(0,len(X[d][e][s][c])):
                         suma=X[d][e][s][c][p]+suma
+    # print('[*] curso '+str(c)+ " suma "+str(suma))
     return suma>=input['cursos'][c]['horas']
 
 def R2(X,d,e,p):
@@ -18,6 +19,7 @@ def R2(X,d,e,p):
     for s in range(0,len(X[d][e])):
             for c in range(0,len(X[d][e][s])):
                 suma=X[d][e][s][c][p]+suma
+    # print('[*] profesor '+str(p)+' suma '+str(suma)+' dia'+str(d)+' evento'+str(e))
     return suma <= 1
 
 def R3(X,d,e,s):
@@ -26,6 +28,7 @@ def R3(X,d,e,s):
     for c in range(0,len(X[d][e][s])):
             for p in range(0,len(X[d][e][s][c])):
                 suma=X[d][e][s][c][p]+suma
+    # print('[*] salon '+str(s),'suma ' +str(suma))
     return suma <= 1
 
 def R4(input,Y,c,p):
@@ -64,6 +67,7 @@ def R8(V,c):
     suma=0
     for s in range(0,len(V[c])):
         suma=V[c][s]+suma
+    # print('[*] curso > ',c,' suma ',suma)    
     return suma<=1
 
 def R9(X,U,W,c):
@@ -81,6 +85,8 @@ def R9(X,U,W,c):
 def R10(W,d,c):
     # R10 = Debe haber al menos un día de descanso entre
     # sesiones del mismo curso
+    # print('d: '+str(d)+' c: ',c,' respuesta> ',W[d][c]+W[d+1][c] <= 1)
+    # print(str(W[d][c])+' + '+str(W[d+1][c])+' = '+str(W[d][c]+W[d+1][c]))
     return W[d][c]+W[d+1][c] <= 1
 
 
