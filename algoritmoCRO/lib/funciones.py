@@ -1,0 +1,2 @@
+def neighborhood(w):
+    pass
