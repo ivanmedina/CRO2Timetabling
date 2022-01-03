@@ -21,22 +21,41 @@ def rotate(array, n):
     return array
 
 # operador para colision inefectiva contra la pared
+# y colision inefectiva intermolecular
 def randomRotate(vector):
     n=random.randint(0,len(vector))
     return rotate(vector,n)
-    
 
-# operador para colision inefectiva intermolecular
-def paireExchange():
-    pass
+def splitInGroups(array,x):
+    return [array[i:i+x] for i in range(0, len(array), x)]
 
 # operador para sintesis
-def exchangePosition():
-    pass
+def halfExchange(array1, array2, n):
+    return array2[:n]+array1[n:]
 
 # operador para descomposicion
-def halfRandom():
-    pass
+def halfOddEven(array, groups):
+    array1=[]
+    array2=[]
+    grouped=splitInGroups(array,groups)
+    for i in range(0,len(grouped)):
+        if (i +1) % 2 == 0 :
+            array1.append(grouped[i])
+            randombit=[0 for x in range(0,groups)]
+            randombit[random.randint(0,groups-1)]=1
+            array2.append(randombit)
+        else:
+            array2.append(grouped[i])
+            randombit=[0 for x in range(0,groups)]
+            randombit[random.randint(0,groups-1)]=1
+            array1.append(randombit)            
+
+    return [array1, array2]
 
 # print(rotate([1,2,3,4,5,6],5))
-print(randomRotate([1,2,3,4,5,6]))
+# print(randomRotate([1,2,3,4,5,6]))
+# print(exchangePosition([1,2,3,4,5], [6,7,8,9,10],2))
+
+soluciones=halfOddEven([1,2,3,4,5,6,7,8,9,10],2)
+print(soluciones[0])
+print(soluciones[1])
