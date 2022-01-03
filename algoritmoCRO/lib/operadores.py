@@ -56,6 +56,6 @@ def halfOddEven(array, groups):
 # print(randomRotate([1,2,3,4,5,6]))
 # print(exchangePosition([1,2,3,4,5], [6,7,8,9,10],2))
 
-soluciones=halfOddEven([1,2,3,4,5,6,7,8,9,10],2)
-print(soluciones[0])
-print(soluciones[1])
+# soluciones=halfOddEven([1,2,3,4,5,6,7,8,9,10],2)
+# print(soluciones[0])
+# print(soluciones[1])
