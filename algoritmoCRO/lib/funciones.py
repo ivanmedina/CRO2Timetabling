@@ -1,4 +1,4 @@
-def neighborhood(function, w):
+def neighbor(function, w):
     return function(w)
 
 def inicializacion(funcion, parametros):

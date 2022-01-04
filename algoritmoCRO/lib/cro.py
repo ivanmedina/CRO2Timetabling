@@ -6,6 +6,7 @@ from operadores import *
 def CRO( initialKE, KELossRate, colision, finicio, pinicio, fobjetivo, pobjetivo, ffitness, fcriterio, pcriterio ):
 
     poblacion = inicializacion( finicio, pinicio, initialKE, ffitness, fobjetivo, pobjetivo )
+    pobSize = len(poblacion)
     buffer = 0
     mejor = None
 
@@ -27,10 +28,11 @@ def CRO( initialKE, KELossRate, colision, finicio, pinicio, fobjetivo, pobjetivo
             m1=selMolecula()  # seleccionar molecula 1
             m2=selMolecula()  # seleccionar molecula 2
             if esSintesis():
-                md=sintesis( m1, m2, buffer )
-                poblacion.pop( m1.n ) # remover molecula 1 de la poblacion
-                poblacion.pop( m2.n ) # remover molecula 2 de la poblacion
-                poblacion.append( md ) # agregar nueva molecula a la poblacion
+                md=sintesis( m1, m2, halfExchange, fobjetivo, pobjetivo, pobSize, initialKE )
+                if(md[1]): # si es una reaccion exitosa
+                    poblacion.pop( m1.n ) # remover molecula 1 de la poblacion
+                    poblacion.pop( m2.n ) # remover molecula 2 de la poblacion
+                    poblacion.append( md ) # agregar nueva molecula a la poblacion
             else:
                 mds=colision_inef_intermol( m1, m2 )
                 md1=mds[0] # molecula 1
