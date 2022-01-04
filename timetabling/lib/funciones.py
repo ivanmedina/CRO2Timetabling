@@ -52,3 +52,118 @@ def Z(X,G):
                     for p in range(0,len(X[d][e][s][c])):
                         suma=(X[d][e][s][c][p] * G[d][e][s] )+suma
     return suma
+
+def WdeX(X):
+
+    W = [ [ 0 for c in range(0,len(X[0][0][0])) ] for d in range(0,len(X))  ]
+
+    for d in range(0,len(X)):
+        for e in range(0,len(X[d])):
+            for s in range(0,len(X[d][e])):
+                for c in range(0,len(X[d][e][s])):
+                    for p in range(0,len(X[d][e][s][c])):
+                        if X[d][e][s][c][p] > 1:
+                            W[d][c] = 1
+    return W
+            
+def YdeX(X):
+
+    Y = [ [ 0 for p in range( 0, len( X[0][0][0][0] ) ) ] for c in range( 0,len( X[0][0][0] ) )  ]
+
+    for c in range(0,len(Y)):
+        for e in range(0,len(X[c])):
+            for s in range(0,len(X[c][e])):
+                for p in range(0,len(X[c][e][s][p])):
+                    if X[c][e][s][p][p] > 1:
+                        Y[c][p] = 1
+    return Y
+
+def UdeX(X):
+
+    U = [ 0 for c in range( 0,len( X[0][0][0] ) )  ]
+    find=False
+
+    for c in range(0,len(U)):
+        for d in range(0,len(X)):
+            for e in range(0,len(X[d])):
+                for s in range(0,len(X[d][e])):
+                    for p in range(0,len(X[d][e][s][c])):
+                        if X[d][e][s][c][p] > 1:
+                            U[c] = e
+                            find = True
+                            break
+                    if find: break
+                if find: break
+            if find: break
+    return U
+
+def VdeX(X):
+    
+    V = [ [ 0 for s in range(0,len(X[0][0]))] for c in range( 0,len( X[0][0][0] ) )  ]
+    
+    for d in range(0,len(X)):
+        for e in range(0,len(X[d])):
+            for s in range(0,len(X[d][e])):
+                for c in range(0,len(X[d][e][s])):
+                    for p in range(0,len(X[d][e][s][c])):
+                        if X[d][e][s][c][p] > 1:
+                            V[c][s] = 1
+    return V
+
+def GdeX(X):
+    
+    G = [ [ [ 0 for s in range(0,len( X[0][0] ) ) ] for e in range(0,len( X[0] ) ) ] for d in range( 0,len( X ) )  ]
+    
+    for d in range(0,len(X)):
+        for e in range(0,len(X[d])):
+            for s in range(0,len(X[d][e])):
+                for c in range(0,len(X[d][e][s])):
+                    for p in range(0,len(X[d][e][s][c])):
+                        if X[d][e][s][c][p] > 1:
+                            G[d][e][s] = 1
+    return G
+
+
+def OdeX(X):
+    
+    O = [ [ [ 0 for p in range(0,len( X[0][0][0][0] ) ) ] for e in range(0,len( X[0] ) ) ] for d in range( 0,len( X ) )  ]
+    
+    for d in range(0,len(X)):
+        for e in range(0,len(X[d])):
+            for s in range(0,len(X[d][e])):
+                for c in range(0,len(X[d][e][s])):
+                    for p in range(0,len(X[d][e][s][c])):
+                        if X[d][e][s][c][p] > 1:
+                            O[d][e][p] = 1
+    return O
+
+def QdeX(X):
+
+    Q = [ 0 for s in range( 0,len( X[0][0] ) )  ]
+    find=False
+
+    for c in range(0,len(Q)):
+        for d in range(0,len(X)):
+            for e in range(0,len(X[d])):
+                for s in range(0,len(X[d][e])):
+                    for p in range(0,len(X[d][e][s][c])):
+                        if X[d][e][s][c][p] > 1:
+                            Q[s] = 1
+                            find = True
+                            break
+                    if find: break
+                if find: break
+            if find: break
+    return Q
+
+def MatricesX(X):
+    
+    return {
+        "G" : GdeX(X),
+        "O" : OdeX(X),
+        "W" : WdeX(X),
+        "Y" : YdeX(X),
+        "V" : VdeX(X),
+        "U" : UdeX(X),
+        "Q" : QdeX(X)
+    }
