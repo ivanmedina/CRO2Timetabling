@@ -26,8 +26,8 @@ def randomRotate(vector,parametros):
     n=random.randint(0,parametros['n'])
     return rotate(vector,n)
 
-def splitInGroups(array,x):
-    return [array[i:i+x] for i in range(0, len(array), x)]
+def splitInGroups( array, parametros ):
+    return [ array[i:i+parametros['n']] for i in range(0, len(array), parametros['n'] ) ]
 
 # operador para sintesis
 def halfExchange( array1, array2, parametros ):
@@ -37,18 +37,18 @@ def halfExchange( array1, array2, parametros ):
 def halfOddEven(array, parametros):
     array1=[]
     array2=[]
-    grouped=splitInGroups(array,parametros['grupos'])
+    grouped=splitInGroups(array,parametros )
     for i in range(0,len(grouped)):
         if (i +1) % 2 == 0 :
-            array1.append(grouped[i])
-            randombit=[0 for x in range(0,parametros['grupos'])]
-            randombit[random.randint(0,parametros['grupos']-1)]=1
-            array2.append(randombit)
+            array1= array1+grouped[i]
+            randombit=[0 for x in range(0,parametros['n'])]
+            randombit[random.randint(0,parametros['n']-1)]=1
+            array2 = array2 + randombit
         else:
-            array2.append(grouped[i])
-            randombit=[0 for x in range(0,parametros['grupos'])]
-            randombit[random.randint(0,parametros['grupos']-1)]=1
-            array1.append(randombit)            
+            array2 = array2 + grouped[i]
+            randombit=[0 for x in range(0,parametros['n'])]
+            randombit[random.randint(0,parametros['n']-1)]=1
+            array1 = array1 +randombit
     return [array1, array2]
 
 
