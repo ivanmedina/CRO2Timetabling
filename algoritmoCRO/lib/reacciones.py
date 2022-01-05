@@ -1,13 +1,13 @@
-from funciones import neighborhood
-from operadores import *
-from molecula import Molecula
+from lib.funciones import *
+from lib.operadores import *
+from lib.molecula import Molecula
 
 def colision_inef_pared( M, buffer, neighbor, pneighbor, fobjetivo, pobjetivo, KELossRate ):
     wd=neighbor(M.w, pneighbor) # neighbor(m)
-    PEwd=fobjetivo( pobjetivo, )
+    PEwd=fobjetivo( pobjetivo )
     if M.PE  + M.KE >= PEwd:
         q=random.uniform( KELossRate, 1 )
-        M.PE=fobjetivo()
+        M.PE=fobjetivo( pobjetivo )
         KEwd= ( M.PE + M.KE - PEwd ) * q
         buffer = buffer + ( M.PE + M.KE - PEwd ) * ( 1- q )
         M.w=wd
@@ -19,8 +19,8 @@ def colision_inef_pared( M, buffer, neighbor, pneighbor, fobjetivo, pobjetivo, K
 def colision_inef_intermol( M1, M2, neighbor, pneighbor, fobjetivo, pobjetivo ):
     wd1=neighbor(M1.w, pneighbor)
     wd2=neighbor(M2.w, pneighbor)
-    PEwd1 = fobjetivo
-    PEwd2 = fobjetivo
+    PEwd1 = fobjetivo( pobjetivo )
+    PEwd2 = fobjetivo( pobjetivo )
     temp2 =  ( M1.PE + M2.PE + M1.KE + M2.KE ) - ( PEwd1 + PEwd2 )
     if temp2 >= 0:
         p=random.uniform( 0, 1 )
@@ -36,7 +36,7 @@ def colision_inef_intermol( M1, M2, neighbor, pneighbor, fobjetivo, pobjetivo ):
 
 def sintesis( M1, M2, neighbor, pneighbor, fobjetivo, pobjetivo, pobSize, InitialKE ):
     wd = neighbor(M1.w, M2.w, pneighbor)
-    PEwd = fobjetivo
+    PEwd = fobjetivo( pobjetivo )
     exito = False
     Md = Molecula( pobSize, wd, InitialKE, PEwd )
     if M1.PE + M2.PE + M1.KE + M2.KE >= Md.PE:
@@ -47,8 +47,8 @@ def sintesis( M1, M2, neighbor, pneighbor, fobjetivo, pobjetivo, pobSize, Initia
 
 def descomposicion( M, buffer, neighbor, pneighbor, fobjetivo, pobjetivo, pobSize, InitialKE ):
     wds = neighbor( M.w, pneighbor )
-    Md1 = Molecula( pobSize, wds[0], InitialKE, fobjetivo )
-    Md2 = Molecula( pobSize+1, wds[1], InitialKE, fobjetivo )
+    Md1 = Molecula( pobSize, wds[0], InitialKE, fobjetivo( pobjetivo ) )
+    Md2 = Molecula( pobSize+1, wds[1], InitialKE, fobjetivo( pobjetivo ) )
     temp1 = M.PE + M.KE - Md1.PE - Md2.PE 
     exito = False
     if temp1 >= 0:

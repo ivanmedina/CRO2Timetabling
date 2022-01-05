@@ -101,32 +101,32 @@ def verificarR10(input,W):
         # if not verificado: break
     return verificado
 
-def RDCheck(input,parametros):
-    if RD(input,parametros)==RDn:
+def RDCheck(input,variables):
+    if RD(input,variables)==RDn:
         return 1
     return 0
 
-def RD(input,parametros):
+def RD(input,variables):
     suma=0
-    suma+=verificarR1(input,parametros['X'])
-    suma+=verificarR2(input,parametros['X'])
-    suma+=verificarR3(parametros['X'])
-    suma+=verificarR4(input,parametros['Y'])
-    suma+=verificarR5(input,parametros['Y'])
-    suma+=verificarR6(input,parametros['X'])
-    suma+=verificarR7(input,parametros['X'])
+    suma+=verificarR1(input,variables['X'])
+    suma+=verificarR2(input,variables['X'])
+    suma+=verificarR3(variables['X'])
+    suma+=verificarR4(input,variables['Y'])
+    suma+=verificarR5(input,variables['Y'])
+    suma+=verificarR6(input,variables['X'])
+    suma+=verificarR7(input,variables['X'])
     return suma
 
-def RS(input,parametros,Zanterior,Znueva):
+def RS(input,variables,Zanterior,Znueva):
     suma=0
-    suma+=verificarR8(parametros['V'])
-    suma+=verificarR9(input,parametros['X'],parametros['U'],parametros['W'])
-    suma+=verificarR10(input,parametros['V'])
+    suma+=verificarR8(variables['V'])
+    suma+=verificarR9(input,variables['X'],variables['U'],variables['W'])
+    suma+=verificarR10(input,variables['V'])
     suma+= 100 if R11(Zanterior,Znueva) else 0
     return suma
 
-def fobjetivo(input,parametros,Zanterior,Znueva):
-    return (RD(input,parametros)*K)+RS(input,parametros,Zanterior,Znueva)
+def fobjetivo(parametros):
+    return (RD(parametros['input'],parametros['variables'])*parametros['K'])+RS(parametros['input'],parametros['variables'],parametros['Zanterior'],parametros['Znueva'])
 
 def fitness(Z):
     return 1/(1-Z)
