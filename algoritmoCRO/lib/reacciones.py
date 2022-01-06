@@ -3,6 +3,7 @@ from lib.operadores import *
 from lib.molecula import Molecula
 
 def colision_inef_pared( M, buffer, neighbor, pneighbor, fobjetivo, pobjetivo, KELossRate ):
+    M.hits=M.hits+1
     wd=neighbor(M.w, pneighbor) # neighbor(m)
     PEwd=fobjetivo( pobjetivo )
     if M.PE  + M.KE >= PEwd:
@@ -17,6 +18,8 @@ def colision_inef_pared( M, buffer, neighbor, pneighbor, fobjetivo, pobjetivo, K
 
 
 def colision_inef_intermol( M1, M2, neighbor, pneighbor, fobjetivo, pobjetivo ):
+    M1.hits = M1.hits + 1
+    M2.hits = M2.hits + 1
     wd1=neighbor(M1.w, pneighbor)
     wd2=neighbor(M2.w, pneighbor)
     PEwd1 = fobjetivo( pobjetivo )
@@ -35,10 +38,12 @@ def colision_inef_intermol( M1, M2, neighbor, pneighbor, fobjetivo, pobjetivo ):
     return [ M1, M2 ]
 
 def sintesis( M1, M2, neighbor, pneighbor, fobjetivo, pobjetivo, pobSize, InitialKE ):
+    M1.hits=M1.hits+1
+    M2.hits=M2.hits+1
     wd = neighbor(M1.w, M2.w, pneighbor)
     PEwd = fobjetivo( pobjetivo )
     exito = False
-    Md = Molecula( pobSize, wd, InitialKE, PEwd )
+    Md = Molecula( pobSize, wd, InitialKE, PEwd, 0, wd, PEwd, 0 )
     if M1.PE + M2.PE + M1.KE + M2.KE >= Md.PE:
         Md.KE = M1.PE + M2.PE + M1.KE + M2.KE - Md.PE
         exito = True
@@ -46,9 +51,12 @@ def sintesis( M1, M2, neighbor, pneighbor, fobjetivo, pobjetivo, pobSize, Initia
 
 
 def descomposicion( M, buffer, neighbor, pneighbor, fobjetivo, pobjetivo, pobSize, InitialKE ):
+    M.hits = M.hits + 1 
     wds = neighbor( M.w, pneighbor )
-    Md1 = Molecula( pobSize, wds[0], InitialKE, fobjetivo( pobjetivo ) )
-    Md2 = Molecula( pobSize+1, wds[1], InitialKE, fobjetivo( pobjetivo ) )
+    PEwd1 =  fobjetivo( pobjetivo )
+    PEwd2 =  fobjetivo( pobjetivo )
+    Md1 = Molecula( pobSize, wds[0], InitialKE, PEwd1, 0, wds[0], PEwd1, 0 )
+    Md2 = Molecula( pobSize+1, wds[1], InitialKE, PEwd2, 0, wds[1], PEwd2, 0 )
     temp1 = M.PE + M.KE - Md1.PE - Md2.PE 
     exito = False
     if temp1 >= 0:
@@ -64,5 +72,5 @@ def descomposicion( M, buffer, neighbor, pneighbor, fobjetivo, pobjetivo, pobSiz
         m4 = random.uniform(0,1)
         Md1.KE = ( temp1 + buffer ) * m1 * m2
         Md2.KE = ( temp1 + buffer ) * m3 * m4
-        buffer = temp1 + buffer - Md1.KE - Md2.ke
+        buffer = temp1 + buffer - Md1.KE - Md2.KE
     return [ Md1, Md2, buffer, exito]          

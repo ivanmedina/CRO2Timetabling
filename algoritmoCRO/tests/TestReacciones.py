@@ -36,9 +36,10 @@ class TestReacciones( unittest.TestCase ):
 
     def fobjetivo( self, pobjetivo ):
         return 1
-
-    M1 = Molecula( 0, [ 1, 0, 0, 0, 0, 0, 1, 0], 0.5, 0.5 )
-    M2 = Molecula( 1, [ 1, 0, 0, 0, 0, 0, 1, 0], 0.5, 0.5 )
+    wd1 = [ 1, 0, 0, 0, 0, 0, 1, 0]
+    wd2 = [ 1, 0, 0, 0, 0, 0, 1, 0]
+    M1 = Molecula( 0, wd1 , 0.5, 1, 0, wd1, 1, 0 )
+    M2 = Molecula( 1, wd1, 0.5,  1, 0, wd2, 1, 0  )
 
     def test_colision_inef_pared(self):
         molecula_nueva = colision_inef_pared( self.M1, self.buffer, self.neighbor, self.pneighbor, self.fobjetivo, self.pobjetivo, self.KELossRate )

@@ -23,15 +23,15 @@ def rotate(array, n):
 # operador para colision inefectiva contra la pared
 # y colision inefectiva intermolecular
 def randomRotate(vector,parametros):
-    n=random.randint(0,parametros['n'])
+    n=random.randint(0,len(vector))
     return rotate(vector,n)
 
 def splitInGroups( array, parametros ):
-    return [ array[i:i+parametros['n']] for i in range(0, len(array), parametros['n'] ) ]
+    return [ array[i:i+parametros['nsig']] for i in range(0, len(array), parametros['nsig'] ) ]
 
 # operador para sintesis
 def halfExchange( array1, array2, parametros ):
-    return array2[:parametros['n']]+array1[parametros['n']:]
+    return array2[:int(len(array1)/2)]+array1[int(len(array1)/2):]
 
 # operador para descomposicion
 def halfOddEven(array, parametros):
@@ -41,13 +41,13 @@ def halfOddEven(array, parametros):
     for i in range(0,len(grouped)):
         if (i +1) % 2 == 0 :
             array1= array1+grouped[i]
-            randombit=[0 for x in range(0,parametros['n'])]
-            randombit[random.randint(0,parametros['n']-1)]=1
+            randombit=[0 for x in range(0,parametros['nsig'])]
+            randombit[random.randint(0,parametros['nsig']-1)]=1
             array2 = array2 + randombit
         else:
             array2 = array2 + grouped[i]
-            randombit=[0 for x in range(0,parametros['n'])]
-            randombit[random.randint(0,parametros['n']-1)]=1
+            randombit=[0 for x in range(0,parametros['nsig'])]
+            randombit[random.randint(0,parametros['nsig']-1)]=1
             array1 = array1 +randombit
     return [array1, array2]
 
