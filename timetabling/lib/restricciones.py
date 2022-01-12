@@ -1,4 +1,4 @@
-from lib.funciones import E
+from timetabling.lib.funciones import E
 
 def R1(input,X,c):
     # R1 = Las materias se programan de acuerdo

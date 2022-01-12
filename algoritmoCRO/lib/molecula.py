@@ -1,6 +1,6 @@
 class Molecula():
 
-    def __init__( self,n,w,KE,PE,hits,minimumw, minimumPE, miniumhits ):
+    def __init__( self,n,w,KE,PE,hits,minimumw, minimumPE, miniumhits, Z ):
         self.n=n
         self.w=w
         self.KE=KE
@@ -9,4 +9,4 @@ class Molecula():
         self.miniumw = minimumw
         self.minimumPE = minimumPE
         self.miniumhits = miniumhits
-        
+        self.Z = Z

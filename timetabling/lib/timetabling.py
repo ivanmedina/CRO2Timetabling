@@ -1,4 +1,13 @@
-from lib.funciones import *
+import os
+import sys
+PROJECT_PATH = os.getcwd()
+SOURCE_PATH = os.path.join(
+    PROJECT_PATH,"../../"
+)
+sys.path.append(SOURCE_PATH)
+
+
+from timetabling.lib.funciones import *
 
 def timetabling(input):
     D = input['dias']
@@ -56,7 +65,6 @@ def timetabling(input):
                                     W[d2][c]=1
                                     e2=e2+1
                                     horas=horas+1
-                                
                                 elif G[d2][e2][s]==1:
                                     G[d2][e2][s]=1
                                     d2=d2+1
@@ -77,10 +85,10 @@ def timetabling(input):
                                 profesor=False
                             if (e2>=En):e2=0
                             if (d2>=Dn):d2=0
-
                             p=profesoresDisponibles(O,d,e)[0]
+                            print(X)
                 if find:
                     break
             if find:
                 break
-    return {"X":X,"W":W,"Y":Y,"V":V,"Q":Q,"U":U,"G":G,"L":L,"O":O}
+    return { "X":X,"W":W,"Y":Y,"V":V,"Q":Q,"U":U,"G":G,"L":L,"O":O,"Z":Z(X,G) }

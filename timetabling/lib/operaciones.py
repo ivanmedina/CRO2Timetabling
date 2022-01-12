@@ -1,4 +1,4 @@
-from lib.restricciones import R1,R2,R3,R4,R5,R6,R7,R8,R9,R10,R11
+from timetabling.lib.restricciones import R1,R2,R3,R4,R5,R6,R7,R8,R9,R10,R11
 
 RDn=7
 RSn=4
@@ -129,4 +129,4 @@ def fobjetivo(parametros):
     return (RD(parametros['input'],parametros['variables'])*parametros['K'])+RS(parametros['input'],parametros['variables'],parametros['Zanterior'],parametros['Znueva'])
 
 def fitness(Z):
-    return 1/(1-Z)
+    return 1/(Z)

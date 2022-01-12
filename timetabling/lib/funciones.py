@@ -70,12 +70,13 @@ def YdeX(X):
 
     Y = [ [ 0 for p in range( 0, len( X[0][0][0][0] ) ) ] for c in range( 0,len( X[0][0][0] ) )  ]
 
-    for c in range(0,len(Y)):
-        for e in range(0,len(X[c])):
-            for s in range(0,len(X[c][e])):
-                for p in range(0,len(X[c][e][s][p])):
-                    if X[c][e][s][p][p] > 1:
-                        Y[c][p] = 1
+    for d in range(0,len(X)):
+        for e in range(0,len(X[d])):
+            for s in range(0,len(X[d][e])):
+                for c in range(0,len(X[d][e][s])):
+                    for p in range(0,len(X[d][e][s][c])):
+                        if X[d][e][s][c][p] > 1:
+                            Y[c][p] = 1
     return Y
 
 def UdeX(X):
@@ -159,6 +160,7 @@ def QdeX(X):
 def MatricesX(X):
     
     return {
+        "X": X,
         "G" : GdeX(X),
         "O" : OdeX(X),
         "W" : WdeX(X),
