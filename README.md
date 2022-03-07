@@ -229,8 +229,6 @@ $$f(F(x))=1 / F(x)$$
 ![imagen1.png](https://raw.githubusercontent.com/ivanmedina/CRO2Timetabling/main/assets/Imagen10.png)
 ![imagen1.png](https://raw.githubusercontent.com/ivanmedina/CRO2Timetabling/main/assets/Imagen11.png)
 
-$$P=\left[P_{0}, P_{1}, P_{2},{ \ldots}, P_{n}\right]$$ 
-
 ## Conclusion
 
 The current research is satisfactorily concluded, whose purpose is to demonstrate that it is possible to achieve better solutions to the timetabling problem with the CRO algorithm,
