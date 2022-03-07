@@ -13,9 +13,9 @@ def timetabling(input):
     D = input['dias']
     E = input['espacios']
     S = input['salones']
-    C = input['cursos']
+    C = input['cursos']    
     P = input['profesores']
-
+    
     Dn = len(input['dias'])
     En = len(input['espacios'])
     Sn = len(input['salones'])
@@ -29,31 +29,32 @@ def timetabling(input):
     Q = [ 0 for s in range(0,Sn) ]
     U = [ 0 for c in range(0,Cn) ] #primera sesion del curso
     G = [ [ [ 0 for s in range(0,Sn) ] for e in range(0,En) ] for d in range(0,Dn) ] # dias eventos salones 1 si esta ocupado
-    L = [ [ 0 for e in range(0,En)] for d in range (0,Dn) ] # eventos
     O = [ [ [ 0 for p in range(0,Pn) ] for e in range(0,En) ] for d in range(0,Dn) ]
-
+    gamma =  [ [ -1 for c in range(0,len(X[0][0][0])) ] for d in range(0,len(X)) ]
+    omega =  [ [ -1 for c in range(0,len(X[0][0][0])) ] for d in range(0,len(X)) ]
+    
     while(len(cursosDisponible(Y))>0):
-        # print(cursosDisponible(Y))
         c=cursosDisponible(Y)[0]
-        # Y[c]=1
-        for d in range(0,len(G)-1,2):
+        for d in range(0,len(G),2):
             find=False
             for e in range(0,len(G[d])):
                 #seleccionar salon
-                if (len(salonesDisponibles(G,d,e))>0):
-                    sd=salonesDisponibles(G,d,e)
+                salondisponible=salonesDisponibles(G,d,e)
+                if (len(salondisponible)>0):
+                    sd=salondisponible
+                    # intencionalmente no se permite el uso de todos los salones
                     s=sd[0]
                     #revisa los profesores
                     pd=profesoresDisponibles(O,d,e)
-                    if(len(pd)>0):
+                    if(len(pd)>0 and s<(Sn/2)):
                         profesor=True
                         p=pd[0]
-                        while(profesor and p<len(pd) and int(cantCursosProfesor(Y,pd[p]))<input['maxCP']):
+                        while(profesor and len(pd)>0 and int(cantCursosProfesor(Y,p))<input['maxCP']):
                             horas=0
                             d2=d
                             e2=e
                             while horas < C[c]['horas']:
-                                pdp=pd[p]
+                                pdp=p
                                 if P[pdp]['disponible'][d2][e2] == 1 and G[d2][e2][s]==0 and O[d2][e2][pdp]==0:
                                 #   #marcar profesor salon dia y evento y curso ocupados
                                     Y[c][pdp]=1
@@ -63,32 +64,33 @@ def timetabling(input):
                                     G[d2][e2][s]=1
                                     O[d2][e2][pdp]=1
                                     W[d2][c]=1
+                                    Q[s]=1
                                     e2=e2+1
                                     horas=horas+1
                                 elif G[d2][e2][s]==1:
-                                    G[d2][e2][s]=1
                                     d2=d2+1
                                 elif O[d2][e2][pdp]==1:
-                                    O[d2][e2][pdp]=1
                                     pd=profesoresDisponibles(O,d2,e2)
                                     p=0
                                 if e2>=input['maxEC']:
                                     e2=e
-                                    if d2>=Dn-2:d2=d2+2
-                                    else:d2=d2+2
+                                    if d2<=Dn-2:d2=d2+2
+                                    else:
+                                        d2=d2+1
                                 if d2>=Dn:
                                     d2=0
                                     e2=0
                             if horas>=C[c]['horas']:
-                                Q[s]=1
                                 find=True
                                 profesor=False
                             if (e2>=En):e2=0
                             if (d2>=Dn):d2=0
-                            p=profesoresDisponibles(O,d,e)[0]
-                            print(X)
+                            p=profesoresDisponibles(O,d,e)
+                            if(len(p) > 0):p=p[0]
                 if find:
                     break
             if find:
                 break
-    return { "X":X,"W":W,"Y":Y,"V":V,"Q":Q,"U":U,"G":G,"L":L,"O":O,"Z":Z(X,G) }
+    gamma=GammaX(X)
+    omega=OmegaX(X)
+    return { "X":X,"W":W,"Y":Y,"V":V,"Q":Q,"U":U,"G":G,"O":O,"Z":Z(X),"gamma":gamma, "omega":omega }
