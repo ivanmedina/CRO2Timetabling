@@ -62,7 +62,20 @@ def R7(input,X,d,c,p):
             suma=X[d][e][s][c][p]+suma
     return suma <= input['maxEC']
 
-def R8(V,c):
+def R8( input, X,Y,W,V, gamma, omega, c,d ):
+    suma=0
+    for e in range (gamma[d][c],omega[d][c]):
+        for s in range(0,len(input['salones'])):
+            for p in range(0,len(input['profesores'])):
+                if W[d][c] == 1 and Y[c][p] == 1 and V[c][s]==1:
+                    value= X[d][e][s][c][p]
+                    suma = suma + value
+    if W[d][c] == 1:
+        # print('R8: ',((omega[d][c] + 1) - (gamma[d][c] + 1))  == suma)
+        return ((omega[d][c] + 1) - (gamma[d][c] + 1))  == suma
+    else: return True
+
+def R9(V,c):
     # R8 = A cada curso le corresponde solo un salón.
     suma=0
     for s in range(0,len(V[c])):
@@ -70,7 +83,7 @@ def R8(V,c):
     # print('[*] curso > ',c,' suma ',suma)    
     return suma<=1
 
-def R9(X,U,W,c):
+def R10(X,U,W,c):
     # R9 = Cursos asignados mas de un día deben empezar a la misma hora.
     sumaX=0
     for d in range(0,len(X)):
@@ -82,7 +95,7 @@ def R9(X,U,W,c):
         sumaW=W[d][c]+sumaW
     return sumaX==sumaW
 
-def R10(W,d,c):
+def R11(W,d,c):
     # R10 = Debe haber al menos un día de descanso entre
     # sesiones del mismo curso
     # print('d: '+str(d)+' c: ',c,' respuesta> ',W[d][c]+W[d+1][c] <= 1)
@@ -90,8 +103,8 @@ def R10(W,d,c):
     return W[d][c]+W[d+1][c] <= 1
 
 
-def R11(Zanterior,Znueva):
+def R12(Zanterior,Znueva):
     # R12 = Minimizar la cantidad de salones utilizados.
-    return Znueva<Zanterior
+    return Znueva>Zanterior
 
 # E([1,2,3,4,5])
