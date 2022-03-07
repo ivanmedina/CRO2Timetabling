@@ -2,7 +2,7 @@
 
 ## Abstract
 Timetabling is an exponentially growing combinatorial problem that requires a large number of decisions to be made to generate school schedules that meet all established requirements, it is here where many of the times through specialized algorithms the desired solutions are obtained, however, certain resources such as teachers or classrooms could be better used, and for this we need to analyze a large number of possible solutions.
-In the present research, a valid school schedule is taken as an entry, from which we optimize the use of classrooms to take better advantage of them, applying an algorithm that simulates how molecules form in a more favorable molecular structure, reducing their potential energy to the minimum posible. The algorithm is known by the name CRO (Chemical Reaction Optimization), and is known for its effectiveness in solving very difficult combinatorics problems, so it performs successfully on the Timetabling problema.
+In the present research, a valid school schedule is taken as an entry, from which we optimize the use of classrooms to take better advantage of them, applying an algorithm that simulates how molecules form in a more favorable molecular structure, reducing their potential energy to the minimum posible. The algorithm is known by the name CRO (Chemical Reaction Optimization), and is known for its effectiveness in solving very difficult combinatorics problems, so it performs successfully on the Timetabling problem.
 
 ## Surface of potential energy
 ![imagen1.png](https://raw.githubusercontent.com/ivanmedina/CRO2Timetabling/main/assets/Imagen1.png)
