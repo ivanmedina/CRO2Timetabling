@@ -1,6 +1,9 @@
+from time import time
+
+from timetabling.lib.funciones import XaEnteros
+# Representacion binaria de la solución.
 def dibujarTabla(X,input,nombre_archivo):
-    print(input['dias'])
-    horario=open('./output/'+str(nombre_archivo)+'.html','w')
+    horario=open('./../timetabling/output/HTML'+str(nombre_archivo)+'_bin.html','w')
     texto=""
     texto+="<html>"
     texto+="<head>"
@@ -40,6 +43,59 @@ def dibujarTabla(X,input,nombre_archivo):
     texto+="</html>"
     horario.write(texto)
 
+# Representación de la solcuion con numeros enteros
+def timetable(X,nombre_archivo):
+    horario=open('./../timetabling/output/TXT/'+str(nombre_archivo)+'.txt','w')
+    timetable=XaEnteros(X)
+    horario.write(str(timetable))
+    return timetable
+    
+# Representación de la solución para usuario
+def dibujarHorario(timetable,input,nombre_archivo):
+    horario=open('./../timetabling/output/HTML/'+str(nombre_archivo)+'.html','w')
+    texto=""
+    texto+="<html>"
+    texto+="<head>"
+    texto+="<style>"
+    texto+="table, th, td {border: 1px solid black;}"
+    texto+="</style>"
+    texto+="</head>"
+    texto+="<body>"
+    texto+="<table style='width:90%;padding:10px'>"
+    iterator=0
+
+    texto+="<tr>"
+    texto+="<th></th>"
+    for s in range(0,len(input['salones'])):
+            texto+="<th>"
+            texto+=input['salones'][s]
+            texto+="</th>"
+    texto+="</tr>"
+    for d in range(0,len(input['dias'])):
+        for e in range(0,len(input['espacios'])):
+            texto+="<tr>"
+            texto+="<td>"
+            texto+=input['dias'][d]
+            texto+="<small>["
+            texto+=input['espacios'][e]
+            texto+="]</small>"
+            texto+="</td>"
+            for s in range(0,len(input['salones'])):
+                texto+="<td>"
+                if len(timetable[iterator])>0:
+                    if s < len(timetable[iterator]):
+                        try:
+                            texto+=input['cursos'][timetable[iterator][s][0]]['nombre']
+                            texto+="<small>("
+                            texto+=input['profesores'][timetable[iterator][s][1]]['nombre']
+                            texto+=")</small>"
+                        except: pass    
+                texto+="</td>"
+            texto+="</tr>"
+            iterator=iterator +1
+    horario.write(texto)
+
+# Dibujar matriz de 1 y 0s ( descontinuado )
 def dibujarMatriz(X):
     string="["
     for d in range(0,len(X)):
