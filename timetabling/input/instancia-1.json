@@ -1,0 +1,1 @@
+{"dias": ["Dia 0"], "espacios": ["Hora 0"], "salones": ["Salon 0"], "cursos": [{"nombre": "Curso 0", "horas": 1}], "profesores": [{"nombre": "Profesor 0", "disponible": [[1]], "cursos": [1]}], "maxCP": 1, "maxEC": 1, "I": [1], "F": 0, "J": [[0]]}
