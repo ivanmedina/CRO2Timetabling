@@ -1,4 +1,3 @@
-import random
 import sys
 from time import sleep
 from time import time
@@ -33,7 +32,10 @@ def mejorSolucion(poblacion,mejor):
     return [ winner,  fin ]
         
 
-def CRO( KELossRate, colision, finicio, pinicio, fobjetivo, pobjetivo, pneighbor, alfa, beta, criterios ):
+def CRO( KELossRate, colision, finicio, pinicio, fobjetivo, pobjetivo, pneighbor, alfa, beta, criterios,
+         strategy=None ):
+    if strategy is None:
+        strategy = CROStrategy()
     poblacion, TE, initialKE = finicio( pinicio ) #inicializacion
     print('\n'+'#'*20+' Etapa 2 ' +'#'*20+'\n')
     pobSize = len(poblacion)
@@ -43,11 +45,10 @@ def CRO( KELossRate, colision, finicio, pinicio, fobjetivo, pobjetivo, pneighbor
     try:
         # CRITERIOS DE ITERACION 
         pinicio['inicio']=time.time()
-        while( pobSize < criterios['a'] and pobSize > criterios['b'] and iteracion < criterios['c'] ):
-            t=random.uniform(0,1)
-            if t > colision: # revisar si no es colision intermolecular
-                m = random.choice(poblacion) # seleccionar molecula
-                if m.hits - m.minimumhits > alfa:
+        while strategy.criterio(pobSize, iteracion, criterios):
+            if not strategy.esIntermolecular(colision):
+                m = strategy.selMolecula(poblacion)
+                if strategy.esDescomposicion(m, alfa):
                     mds=descomposicion( m, Decimal(buffer), operador_descomposicion, pneighbor, fobjetivo, pobjetivo, pobSize, initialKE )
                     if mds[3]:
                         md1=mds[0] # molecula 1
@@ -77,18 +78,9 @@ def CRO( KELossRate, colision, finicio, pinicio, fobjetivo, pobjetivo, pneighbor
                         buffer = Decimal(ajuste) + Decimal(buffer) 
                     CalcularTE(poblacion,buffer)
             elif len(poblacion) > 1:
-                n1 = n2 = m1 = m2 = enough =0
-                while(n1==n2 and len(poblacion)>1 and enough <1):
-                    m1=random.choice(poblacion)  # seleccionar molecula 1
-                    m2=random.choice(poblacion)  # seleccionar molecula 2
-                    if m1.n == m2.n and len(poblacion)<3:
-                        break
-                    else: 
-                        n1=m1.n
-                        n2=m2.n 
-                        enough=1
+                m1, m2, enough = strategy.selMoleculas(poblacion)
                 if enough and m1.n != m2.n:
-                    if m1.KE <= beta and m2.KE < beta:
+                    if strategy.esSintesis(m1, m2, beta):
                         md=sintesis( m1, m2, operador_sintesis, pneighbor, fobjetivo, pobjetivo, pobSize, initialKE )
                         if(md[1]): # si es una reaccion exitosa
                             poblacion.remove( m1 ) # remover molecula 1 de la poblacion
