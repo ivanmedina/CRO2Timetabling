@@ -1,6 +1,17 @@
-# cro2timetabling — Contexto · NIVEL: proyecto
-> ⬆ Padre: ../CONTEXT.md
-> ⬇ Hijos: algoritmoCRO/ · timetabling/
+---
+node:
+  id: repo/cro2timetabling
+  type: repo
+parent:
+  - {type: project, id: project/cro2timetabling, path: ../../CONTEXT.md}
+children:
+  - {type: component, id: component/cro2timetabling/algoritmoCRO, path: algoritmoCRO/CONTEXT.md}
+  - {type: component, id: component/cro2timetabling/timetabling, path: timetabling/CONTEXT.md}
+relations: []
+updated: 2026-10-17
+---
+
+# cro2timetabling
 
 ## Identidad
 - **NAME:** CRO2Timetabling

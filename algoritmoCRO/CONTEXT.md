@@ -1,6 +1,15 @@
-# algoritmoCRO — Contexto · NIVEL: componente
-> ⬆ Padre: ../CONTEXT.md
-> ⬇ Hijos: —
+---
+node:
+  id: component/cro2timetabling/algoritmoCRO
+  type: component
+parent:
+  - {type: repo, id: repo/cro2timetabling, path: ../CONTEXT.md}
+children: []
+relations: []
+updated: 2026-10-17
+---
+
+# algoritmoCRO
 > 🔎 codegraph: ./.codegraph
 
 ## Propósito
